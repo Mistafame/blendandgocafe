@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blend & Go Café | Brooklyn Juice, Coffee & Smoothies</title>
+  <meta name="description" content="Blend & Go Café in Brooklyn serves fresh juices, smoothies, coffee, ginger shots, snacks, and signature drinks like Coconut Chill and Nutty Buddy Blend." />
+  <style>
+    :root{
+      --black:#050505;
+      --soft-black:#0d0d0d;
+      --card:#141414;
+      --gold:#d4af37;
+      --gold2:#f1d36b;
+      --cream:#fff8e8;
+      --muted:#cfc7b1;
+      --white:#ffffff;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--white);
+      background:var(--black);
+    }
+    a{color:inherit}
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 22px;
+      background:rgba(0,0,0,.86);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(212,175,55,.35);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      min-width:0;
+    }
+    .brand img{
+      width:54px;
+      height:54px;
+      object-fit:contain;
+      border-radius:50%;
+      background:#fff;
+      padding:3px;
+      border:1px solid var(--gold);
+    }
+    .brand-name{
+      line-height:1.05;
+      font-weight:900;
+      letter-spacing:.08em;
+      color:var(--gold2);
+      font-size:18px;
+    }
+    .brand-tag{
+      display:block;
+      font-size:11px;
+      letter-spacing:.02em;
+      color:var(--muted);
+      margin-top:4px;
+      font-weight:600;
+    }
+    nav{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      font-size:14px;
+      font-weight:700;
+    }
+    nav a{
+      text-decoration:none;
+      color:#f5edd7;
+      opacity:.92;
+    }
+    nav a:hover{color:var(--gold2)}
+    .nav-call{
+      background:var(--gold);
+      color:#000!important;
+      padding:10px 15px;
+      border-radius:999px;
+    }
+    .hero{
+      min-height:86vh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      background:
+        linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.65),rgba(0,0,0,.2)),
+        url("https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat;
+    }
+    .hero:after{
+      content:"";
+      position:absolute;
+      inset:auto 0 0 0;
+      height:150px;
+      background:linear-gradient(transparent,var(--black));
+    }
+    .hero-content{
+      position:relative;
+      z-index:2;
+      width:min(1100px,92%);
+      margin:auto;
+      padding:70px 0;
+    }
+    .eyebrow{
+      display:inline-block;
+      color:#000;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      padding:9px 14px;
+      border-radius:999px;
+      font-weight:900;
+      letter-spacing:.08em;
+      font-size:12px;
+      text-transform:uppercase;
+      margin-bottom:20px;
+    }
+    h1{
+      font-size:clamp(44px,7vw,88px);
+      line-height:.95;
+      margin:0 0 18px;
+      max-width:850px;
+      letter-spacing:-.05em;
+    }
+    .gold{color:var(--gold2)}
+    .hero p{
+      max-width:650px;
+      font-size:clamp(18px,2.3vw,24px);
+      line-height:1.5;
+      color:#f5eedb;
+      margin:0 0 28px;
+    }
+    .buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:15px 22px;
+      min-height:52px;
+      border-radius:999px;
+      font-weight:900;
+      text-decoration:none;
+      border:1px solid rgba(212,175,55,.7);
+    }
+    .btn.primary{background:var(--gold);color:#000}
+    .btn.secondary{background:rgba(255,255,255,.08);color:#fff}
+    .section{
+      padding:74px 22px;
+    }
+    .wrap{
+      width:min(1120px,100%);
+      margin:auto;
+    }
+    .section-title{
+      text-align:center;
+      margin-bottom:34px;
+    }
+    .section-title h2{
+      margin:0 0 12px;
+      font-size:clamp(32px,5vw,52px);
+      letter-spacing:-.04em;
+    }
+    .section-title p{
+      margin:0 auto;
+      max-width:720px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.55;
+    }
+    .features{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:-70px;
+      position:relative;
+      z-index:10;
+    }
+    .feature{
+      background:linear-gradient(180deg,#181818,#0e0e0e);
+      border:1px solid rgba(212,175,55,.32);
+      border-radius:22px;
+      padding:24px;
+      box-shadow:0 20px 50px rgba(0,0,0,.35);
+    }
+    .feature b{
+      display:block;
+      color:var(--gold2);
+      font-size:20px;
+      margin-bottom:8px;
+    }
+    .feature span{color:#d7d0be;line-height:1.45}
+    .menu-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+    .drink-card{
+      overflow:hidden;
+      border-radius:26px;
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 20px 60px rgba(0,0,0,.25);
+    }
+    .drink-card img{
+      display:block;
+      width:100%;
+      height:245px;
+      object-fit:cover;
+      filter:saturate(1.05) contrast(1.04);
+    }
+    .drink-info{padding:22px}
+    .drink-info h3{
+      margin:0 0 9px;
+      font-size:23px;
+      color:var(--gold2);
+    }
+    .drink-info p{
+      margin:0;
+      color:#d8d0bd;
+      line-height:1.5;
+    }
+    .signature{
+      background:
+        radial-gradient(circle at top left,rgba(212,175,55,.18),transparent 35%),
+        linear-gradient(180deg,#070707,#111);
+    }
+    .sig-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:center;
+    }
+    .sig-photo{
+      min-height:440px;
+      border-radius:34px;
+      background:
+        linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.15)),
+        url("https://images.unsplash.com/photo-1589733955941-5eeaf752f6dd?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat;
+      border:1px solid rgba(212,175,55,.32);
+      box-shadow:0 24px 80px rgba(0,0,0,.35);
+    }
+    .sig-copy h2{
+      font-size:clamp(34px,5vw,58px);
+      margin:0 0 14px;
+      letter-spacing:-.04em;
+    }
+    .sig-copy p{
+      color:#e7ddc5;
+      line-height:1.65;
+      font-size:18px;
+    }
+    .pill-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:22px;
+    }
+    .pill{
+      border:1px solid rgba(212,175,55,.45);
+      color:var(--cream);
+      padding:10px 13px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      font-weight:800;
+      font-size:14px;
+    }
+    .about-contact{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+    }
+    .panel{
+      background:linear-gradient(180deg,#151515,#0d0d0d);
+      border:1px solid rgba(212,175,55,.25);
+      border-radius:28px;
+      padding:32px;
+    }
+    .panel h2{
+      margin:0 0 14px;
+      color:var(--gold2);
+      font-size:34px;
+    }
+    .panel p{
+      color:#ddd4bd;
+      line-height:1.65;
+      font-size:17px;
+    }
+    .contact-line{
+      display:block;
+      margin:14px 0;
+      color:#fff;
+      text-decoration:none;
+      font-weight:800;
+    }
+    iframe{
+      width:100%;
+      height:320px;
+      border:0;
+      border-radius:22px;
+      filter:grayscale(.25) contrast(1.05);
+      margin-top:10px;
+    }
+    footer{
+      padding:30px 22px;
+      border-top:1px solid rgba(212,175,55,.25);
+      background:#000;
+      text-align:center;
+      color:#bfb7a5;
+    }
+    @media(max-width:850px){
+      nav{display:none}
+      .topbar{padding:12px 16px}
+      .brand img{width:48px;height:48px}
+      .features,.menu-grid,.sig-grid,.about-contact{grid-template-columns:1fr}
+      .features{margin-top:0;padding-top:22px}
+      .hero{min-height:78vh}
+      .section{padding:56px 16px}
+      .sig-photo{min-height:330px}
+      .drink-card img{height:230px}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="#">
+      <img src="logo.jpeg" alt="Blend & Go Café logo" onerror="this.style.display='none'">
+      <div>
+        <div class="brand-name">BLEND & GO CAFÉ</div>
+        <span class="brand-tag">Your body needs a good blend.</span>
+      </div>
+    </a>
+    <nav>
+      <a href="#menu">Menu</a>
+      <a href="#signature">Signature Drinks</a>
+      <a href="#about">About</a>
+      <a href="#visit">Visit</a>
+      <a class="nav-call" href="tel:9294805117">Call Now</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">Brooklyn Café • Fresh & Made To Go</span>
+        <h1>Fresh flavor. <span class="gold">Good energy.</span> Made to go.</h1>
+        <p>Blend & Go Café serves fresh juices, smoothies, coffee, ginger shots, snacks, and signature drinks made with neighborhood love.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#menu">View Menu</a>
+          <a class="btn secondary" href="tel:9294805117">Call 929-480-5117</a>
+          <a class="btn secondary" href="https://www.google.com/maps/search/?api=1&query=564+E+42nd+Street+Brooklyn+NY+11203">Get Directions</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="features">
+        <div class="feature">
+          <b>☕ Coffee</b>
+          <span>Hot, iced, lattes, cappuccino, and café favorites.</span>
+        </div>
+        <div class="feature">
+          <b>🥤 Smoothies & Shakes</b>
+          <span>Creamy, refreshing, and made to order.</span>
+        </div>
+        <div class="feature">
+          <b>⚡ Ginger Shots</b>
+          <span>Bold, fresh, strong, and made for a quick boost.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="menu">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Menu Favorites</h2>
+          <p>Grab something fresh, smooth, hot, cold, healthy, sweet, or strong — all from one neighborhood café.</p>
+        </div>
+
+        <div class="menu-grid">
+          <article class="drink-card">
+            <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=900&q=80" alt="Coffee drink">
+            <div class="drink-info">
+              <h3>Coffee</h3>
+              <p>Fresh hot coffee, iced coffee, lattes, cappuccino, and café drinks.</p>
+            </div>
+          </article>
+
+          <article class="drink-card">
+            <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=900&q=80" alt="Fresh juice">
+            <div class="drink-info">
+              <h3>Fresh Juices</h3>
+              <p>Refreshing fruit and veggie blends made with real ingredients.</p>
+            </div>
+          </article>
+
+          <article class="drink-card">
+            <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=900&q=80" alt="Smoothie">
+            <div class="drink-info">
+              <h3>Smoothies</h3>
+              <p>Cold, creamy, and made to order for a smooth finish.</p>
+            </div>
+          </article>
+
+          <article class="drink-card">
+            <img src="https://images.unsplash.com/photo-1579954115563-e72bf1381629?auto=format&fit=crop&w=900&q=80" alt="Ginger shot">
+            <div class="drink-info">
+              <h3>Ginger Shots</h3>
+              <p>Strong, bold, and fresh — the quick boost people come back for.</p>
+            </div>
+          </article>
+
+          <article class="drink-card">
+            <img src="https://images.unsplash.com/photo-1600788907416-456578634209?auto=format&fit=crop&w=900&q=80" alt="Coconut drink">
+            <div class="drink-info">
+              <h3>Coconut Chill</h3>
+              <p>A cool tropical signature drink with a smooth, premium taste.</p>
+            </div>
+          </article>
+
+          <article class="drink-card">
+            <img src="https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=900&q=80" alt="Peanut butter shake">
+            <div class="drink-info">
+              <h3>Nutty Buddy Blend</h3>
+              <p>A rich, creamy peanut butter drink with a smooth café-style finish.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section signature" id="signature">
+      <div class="wrap sig-grid">
+        <div class="sig-photo" role="img" aria-label="Premium café drink"></div>
+        <div class="sig-copy">
+          <h2>Signature drinks that make people come back.</h2>
+          <p>
+            From Coconut Chill to Nutty Buddy Blend, Blend & Go Café is building a menu with flavor,
+            personality, and drinks people remember. Fresh, smooth, and made to go.
+          </p>
+          <div class="pill-list">
+            <span class="pill">Coconut Chill</span>
+            <span class="pill">Nutty Buddy Blend</span>
+            <span class="pill">Blend & Go Shakes</span>
+            <span class="pill">Fresh Juices</span>
+            <span class="pill">Ginger Shots</span>
+            <span class="pill">Coffee</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap about-contact">
+        <div class="panel">
+          <h2>About Blend & Go</h2>
+          <p>
+            Blend & Go Café is a Brooklyn neighborhood café serving fresh juices, smoothies,
+            coffee, ginger shots, snacks, and signature drinks. We’re here for quick service,
+            fresh flavor, and good energy every time you stop in.
+          </p>
+          <p><strong style="color:var(--gold2)">Juice • Coffee • Smoothies • Ginger Shots • Snacks</strong></p>
+        </div>
+
+        <div class="panel" id="visit">
+          <h2>Visit Us</h2>
+          <a class="contact-line" href="https://www.google.com/maps/search/?api=1&query=564+E+42nd+Street+Brooklyn+NY+11203">📍 564 E 42nd Street, Brooklyn, NY 11203</a>
+          <a class="contact-line" href="tel:9294805117">📞 929-480-5117</a>
+          <a class="contact-line" href="mailto:blendandgocafe@gmail.com">✉️ blendandgocafe@gmail.com</a>
+          <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=564+E+42nd+Street+Brooklyn+NY+11203">Get Directions</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <iframe
+          title="Blend & Go Café Map"
+          loading="lazy"
+          src="https://www.google.com/maps?q=564%20E%2042nd%20Street%20Brooklyn%20NY%2011203&output=embed">
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Blend & Go Café. All rights reserved.
+  </footer>
+
+</body>
+</html>
